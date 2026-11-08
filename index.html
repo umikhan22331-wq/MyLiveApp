@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LQ Topup - Order Portal</title>
+</head>
+<body style="background: #0f0f0f; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 10px;">
+
+    <div style="background: #161616; padding: 20px; border-radius: 12px; color: #fff; max-width: 420px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid #222;">
+        <h2 style="color: #00ffcc; text-align: center; margin-bottom: 5px;">LQ Topup</h2>
+        <p style="text-align: center; color: #aaa; font-size: 13px; margin-top: 0;">Fast & Secure Gaming & Social Top-Up</p>
+
+        <!-- Official Support Banner -->
+        <div style="background: #1b2e23; border: 1px solid #285430; padding: 12px; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <span style="font-size: 12px; color: #76ff03; display: block;">Official WhatsApp Support</span>
+                <strong style="font-size: 15px; color: #fff;">+92 308 8370905</strong>
+            </div>
+            <a href="https://wa.me/923088370905" target="_blank" style="background: #25D366; color: #000; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px;">
+                Chat Now
+            </a>
+        </div>
+
+        <!-- 1. PUBG Mobile Section -->
+        <div style="background: #1e1e1e; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #333;">
+            <h4 style="color: #ff9900; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 8px;">PUBG Mobile UC Top-Up</h4>
+            <form onsubmit="sendPubgOrder(event)">
+                <label style="display: block; margin-top: 8px; font-size: 13px; color: #ccc;">Player ID:</label>
+                <input type="text" id="pubgPlayerId" placeholder="Enter PUBG ID" required style="width: 100%; padding: 8px; margin-top: 4px; background: #111; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box;">
+
+                <label style="display: block; margin-top: 10px; font-size: 13px; color: #ccc;">Select Package:</label>
+                <select id="pubgPackage" required style="width: 100%; padding: 8px; margin-top: 4px; background: #111; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                    <option value="60 UC - 260 PKR">60 UC - 260 PKR</option>
+                    <option value="325 UC - 1280 PKR">325 UC - 1280 PKR</option>
+                    <option value="660 UC - 2550 PKR">660 UC - 2550 PKR</option>
+                </select>
+
+                <label style="display: block; margin-top: 10px; font-size: 13px; color: #ccc;">Payment Method:</label>
+                <select id="pubgPayment" onchange="updatePubgAccountInfo()" required style="width: 100%; padding: 8px; margin-top: 4px; background: #111; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                    <option value="EasyPaisa">EasyPaisa</option>
+                    <option value="JazzCash">JazzCash</option>
+                    <option value="SadaPay">SadaPay</option>
+                </select>
+
+                <!-- Dynamic Account Info Display -->
+                <div id="pubgAccountBox" style="background: #262626; border: 1px solid #00ffcc; border-radius: 6px; padding: 10px; margin-top: 10px;">
+                    <span style="color: #00ffcc; font-size: 13px; font-weight: bold; display: block;">EasyPaisa Details:</span>
+                    <p style="margin: 3px 0; font-size: 12px; color: #ddd;">Account Title: <b>Luqman Hassan</b></p>
+                    <p style="margin: 3px 0; font-size: 12px; color: #ddd;">Number: <b>0308-8370905</b></p>
+                    <p style="margin: 6px 0; font-size: 11px; color: #ffeb3b; line-height: 1.4;">ℹ️ After payment, send your TID or screenshot on WhatsApp: <b>0308-8370905</b></p>
+                    <div style="margin-top: 6px; display: flex; gap: 6px;">
+                        <button type="button" onclick="copyText('0308-8370905')" style="background: #00ffcc; color: #000; border: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer;">Copy Number</button>
+                        <a href="easypaisa://" style="background: #333; color: #fff; text-decoration: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; display: inline-block;">Open App</a>
+                    </div>
+                </div>
+
+                <label style="display: block; margin-top: 10px; font-size: 13px; color: #ccc;">Transaction ID (TID):</label>
+                <input type="text" id="pubgTrxId" placeholder="Enter Payment TID" required style="width: 100%; padding: 8px; margin-top: 4px; background: #111; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box;">
+
+                <button type="submit" style="width: 100%; background: #00ffcc; color: #000; padding: 10px; margin-top: 15px; border: none; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 14px;">Order PUBG via WhatsApp</button>
+            </form>
+        </div>
+
+        <!-- 2. TikTok Coins Section -->
+        <div style="background: #1e1e1e; padding: 15px; border-radius: 8px; border: 1px solid #333;">
+            <h4 style="color: #ff0055; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 8px;">TikTok Coins Top-Up</h4>
+            <form onsubmit="sendTiktokOrder(event)">
+                <label style="display: block; margin-top: 8px; font-size: 13px; color: #ccc;">TikTok Username / ID:</label>
+                <input type="text" id="tiktokUsername" placeholder="Enter TikTok Username" required style="width: 100%; padding: 8px; margin-top: 4px; background: #111; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box;">
+
+                <label style="display: block; margin-top: 10px; font-size: 13px; color: #ccc;">Select Package:</label>
+                <select id="tiktokPackage" required style="width: 100%; padding: 8px; margin-top: 4px; background: #111; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                    <option value="100 Coins">100 Coins</option>
+                    <option value="500 Coins">500 Coins</option>
+                    <option value="1000 Coins">1000 Coins</option>
+                </select>
+
+                <label style="display: block; margin-top: 10px; font-size: 13px; color: #ccc;">Payment Method:</label>
+                <select id="tiktokPayment" onchange="updateTiktokAccountInfo()" required style="width: 100%; padding: 8px; margin-top: 4px; background: #111; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                    <option value="EasyPaisa">EasyPaisa</option>
+                    <option value="JazzCash">JazzCash</option>
+                    <option value="SadaPay">SadaPay</option>
+                </select>
+
+                <!-- Dynamic Account Info Display -->
+                <div id="tiktokAccountBox" style="background: #262626; border: 1px solid #ff0055; border-radius: 6px; padding: 10px; margin-top: 10px;">
+                    <span style="color: #ff0055; font-size: 13px; font-weight: bold; display: block;">EasyPaisa Details:</span>
+                    <p style="margin: 3px 0; font-size: 12px; color: #ddd;">Account Title: <b>Luqman Hassan</b></p>
+                    <p style="margin: 3px 0; font-size: 12px; color: #ddd;">Number: <b>0308-8370905</b></p>
+                    <p style="margin: 6px 0; font-size: 11px; color: #ffeb3b; line-height: 1.4;">ℹ️ After payment, send your TID or screenshot on WhatsApp: <b>0308-8370905</b></p>
+                    <div style="margin-top: 6px; display: flex; gap: 6px;">
+                        <button type="button" onclick="copyText('0308-8370905')" style="background: #ff0055; color: #fff; border: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer;">Copy Number</button>
+                        <a href="easypaisa://" style="background: #333; color: #fff; text-decoration: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; display: inline-block;">Open App</a>
+                    </div>
+                </div>
+
+                <label style="display: block; margin-top: 10px; font-size: 13px; color: #ccc;">Transaction ID (TID):</label>
+                <input type="text" id="tiktokTrxId" placeholder="Enter Payment TID" required style="width: 100%; padding: 8px; margin-top: 4px; background: #111; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box;">
+
+                <button type="submit" style="width: 100%; background: #ff0055; color: #fff; padding: 10px; margin-top: 15px; border: none; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 14px;">Order TikTok via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const ownerNumber = "923088370905";
+
+        const accountData = {
+            "EasyPaisa": { 
+                title: "EasyPaisa Details:", 
+                name: "Luqman Hassan", 
+                number: "0308-8370905", 
+                extra: "", 
+                appUrl: "easypaisa://" 
+            },
+            "JazzCash": { 
+                title: "JazzCash Details:", 
+                name: "Luqman Hassan", 
+                number: "0308-8370905", 
+                extra: "<p style='margin: 3px 0; font-size: 11px; color: #aaa;'>IBAN: <b>PK24JCMA0909923088370905</b></p>", 
+                appUrl: "jazzcash://" 
+            },
+            "SadaPay": { 
+                title: "SadaPay Details:", 
+                name: "Luqman Hassan", 
+                number: "0308-8370905", 
+                extra: "", 
+                appUrl: "sadapay://" 
+            }
+        };
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert("Copied: " + text);
+            });
+        }
+
+        function updatePubgAccountInfo() {
+            let method = document.getElementById('pubgPayment').value;
+            let data = accountData[method];
+            document.getElementById('pubgAccountBox').innerHTML = `
+                <span style="color: #00ffcc; font-size: 13px; font-weight: bold; display: block;">${data.title}</span>
+                <p style="margin: 3px 0; font-size: 12px; color: #ddd;">Account Title: <b>${data.name}</b></p>
+                <p style="margin: 3px 0; font-size: 12px; color: #ddd;">Number: <b>${data.number}</b></p>
+                ${data.extra}
+                <p style="margin: 6px 0; font-size: 11px; color: #ffeb3b; line-height: 1.4;">ℹ️ After payment, send your TID or screenshot on WhatsApp: <b>${ownerNumber}</b></p>
+                <div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button type="button" onclick="copyText('${data.number}')" style="background: #00ffcc; color: #000; border: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer;">Copy Number</button>
+                    ${data.extra ? `<button type="button" onclick="copyText('PK24JCMA0909923088370905')" style="background: #ffaa00; color: #000; border: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer;">Copy IBAN</button>` : ''}
+                    <a href="${data.appUrl}" style="background: #333; color: #fff; text-decoration: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; display: inline-block;">Open App</a>
+                </div>
+            `;
+        }
+
+        function updateTiktokAccountInfo() {
+            let method = document.getElementById('tiktokPayment').value;
+            let data = accountData[method];
+            document.getElementById('tiktokAccountBox').innerHTML = `
+                <span style="color: #ff0055; font-size: 13px; font-weight: bold; display: block;">${data.title}</span>
+                <p style="margin: 3px 0; font-size: 12px; color: #ddd;">Account Title: <b>${data.name}</b></p>
+                <p style="margin: 3px 0; font-size: 12px; color: #ddd;">Number: <b>${data.number}</b></p>
+                ${data.extra}
+                <p style="margin: 6px 0; font-size: 11px; color: #ffeb3b; line-height: 1.4;">ℹ️ After payment, send your TID or screenshot on WhatsApp: <b>${ownerNumber}</b></p>
+                <div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button type="button" onclick="copyText('${data.number}')" style="background: #ff0055; color: #fff; border: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer;">Copy Number</button>
+                    ${data.extra ? `<button type="button" onclick="copyText('PK24JCMA0909923088370905')" style="background: #ffaa00; color: #000; border: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer;">Copy IBAN</button>` : ''}
+                    <a href="${data.appUrl}" style="background: #333; color: #fff; text-decoration: none; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; display: inline-block;">Open App</a>
+                </div>
+            `;
+        }
+
+        function sendPubgOrder(event) {
+            event.preventDefault();
+            let playerId = document.getElementById('pubgPlayerId').value;
+            let package = document.getElementById('pubgPackage').value;
+            let payment = document.getElementById('pubgPayment').value;
+            let trxId = document.getElementById('pubgTrxId').value;
+
+            let message = `*New PUBG UC Order* %0A------------------%0A*Player ID:* ${playerId}%0A*Package:* ${package}%0A*Payment Method:* ${payment}%0A*TID:* ${trxId}`;
+            window.open(`https://wa.me/${ownerNumber}?text=${message}`, '_blank');
+        }
+
+        function sendTiktokOrder(event) {
+            event.preventDefault();
+            let username = document.getElementById('tiktokUsername').value;
+            let package = document.getElementById('tiktokPackage').value;
+            let payment = document.getElementById('tiktokPayment').value;
+            let trxId = document.getElementById('tiktokTrxId').value;
+
+            let message = `*New TikTok Coins Order* %0A------------------%0A*Username:* ${username}%0A*Package:* ${package}%0A*Payment Method:* ${payment}%0A*TID:* ${trxId}`;
+            window.open(`https://wa.me/${ownerNumber}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
